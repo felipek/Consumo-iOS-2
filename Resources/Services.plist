@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>vivo</key>
+	<dict>
+		<key>Name</key>
+		<string>Vivo</string>
+		<key>Title</key>
+		<string>Vivo (Meu Vivo)</string>
+		<key>PasswordSample</key>
+		<string>1234</string>
+		<key>PasswordRE</key>
+		<string>^[[:digit:]]+$</string>
+		<key>PasswordWarning</key>
+		<string>A senha não parece estar correta. Na Vivo, a senha contém dígitos.</string>
+		<key>Definition</key>
+		<string>Vivo.plist</string>
+		<key>Mirrors</key>
+		<array>
+			<string>http://dl.dropbox.com/u/514721/Consumo/Vivo.plist</string>
+		</array>
+	</dict>
+</dict>
+</plist>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Name</key>
+		<string>Fernando Caprio</string>
+		<key>Twitter</key>
+		<string>@cusquinho</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Rodrigo Mota</string>
+		<key>Twitter</key>
+		<string>@rodrigomota</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Michelle Knevitz</string>
+		<key>Twitter</key>
+		<string>@mizinhak</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Fernando Martinewski</string>
+		<key>Twitter</key>
+		<string>@martinewski</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Diego Antunes</string>
+		<key>Twitter</key>
+		<string>@diegowa</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Felipe Lima</string>
+		<key>Twitter</key>
+		<string>@felipecsl</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Alessandro iLex</string>
+		<key>Twitter</key>
+		<string>@blogdoiphone</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Gabriel Levcovitz</string>
+		<key>Twitter</key>
+		<string>@glevcovitz</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Bia Kunze</string>
+		<key>Twitter</key>
+		<string>@garotasemfio</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Gisele Muller</string>
+		<key>Twitter</key>
+		<string>@gismullr</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Newton Mota</string>
+		<key>Twitter</key>
+		<string>@newtonmota</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Vanessa Nunes</string>
+		<key>Twitter</key>
+		<string>@vanessanunes</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Whinston Rodrigues</string>
+		<key>Twitter</key>
+		<string>@gordogeek</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Cristiano Fernandes</string>
+		<key>Twitter</key>
+		<string>@cristianobf</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Cristiano Costa</string>
+		<key>Twitter</key>
+		<string>@caccac</string>
+	</dict>
+</array>
+</plist>

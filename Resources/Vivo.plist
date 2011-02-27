@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Name</key>
+	<string>Vivo</string>
+	<key>Version</key>
+	<string>1.0</string>
+	<key>Author</key>
+	<string>Felipe Kellermann - @felipek</string>
+	<key>Variables</key>
+	<dict>
+		<key>UserAgent</key>
+		<string>Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_6; en-us) AppleWebKit/533.19.4 (KHTML, like Gecko) Version/5.0.3 Safari/533.19.4</string>
+		<key>BaseURL</key>
+		<string>https://servicos.vivo.com.br/meuvivo/appmanager/portal</string>
+	</dict>
+	<key>Requests</key>
+	<array>
+		<dict>
+			<key>URL</key>
+			<string>${BaseURL}/vivoLogin?_nfpb=true&amp;_windowLabel=login_1&amp;login_1_actionOverride=%2Fbr%2Fcom%2Fvivo%2Fvol%2Fportal%2Flogin%2FdoLogin</string>
+			<key>Title</key>
+			<string>Obtendo Dados Básicos</string>
+			<key>HTTPHeaders</key>
+			<dict>
+				<key>User-Agent</key>
+				<string>${UserAgent}</string>
+			</dict>
+			<key>HTTPPostValues</key>
+			<dict>
+				<key>ddd</key>
+				<string>${ddd}</string>
+				<key>linha</key>
+				<string>${linha}</string>
+				<key>senhaIni</key>
+				<string>senha</string>
+				<key>senha</key>
+				<string>${senha}</string>
+				<key>login_1%%7BactionForm.captcha%%7D:</key>
+				<string></string>
+			</dict>
+			<key>Handlers</key>
+			<array>
+				<dict>
+					<key>XPath</key>
+					<string>//div[@class=&apos;boxDadosConteudo floatLeft&apos;]/*/dd</string>
+					<key>Error</key>
+					<dict>
+						<key>Error</key>
+						<string>Sistema indisponível. No momento não foi possível realizar o acesso. Por favor, tente mais tarde.</string>
+					</dict>
+					<key>Results</key>
+					<array>
+						<dict>
+							<key>Node</key>
+							<integer>0</integer>
+							<key>Keys</key>
+							<dict>
+								<key>linha</key>
+								<string></string>
+							</dict>
+						</dict>
+						<dict>
+							<key>Node</key>
+							<integer>2</integer>
+							<key>Keys</key>
+							<dict>
+								<key>plano</key>
+								<string></string>
+							</dict>
+						</dict>
+						<dict>
+							<key>Node</key>
+							<integer>3</integer>
+							<key>Keys</key>
+							<dict>
+								<key>protocolo</key>
+								<string></string>
+							</dict>
+						</dict>
+						<dict>
+							<key>Node</key>
+							<integer>4</integer>
+							<key>Keys</key>
+							<dict>
+								<key>data</key>
+								<string></string>
+							</dict>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>XPath</key>
+					<string>//span[@class=&apos;txtLaranja txtGrande&apos;]/strong</string>
+					<key>Results</key>
+					<array>
+						<dict>
+							<key>Node</key>
+							<integer>0</integer>
+							<key>Keys</key>
+							<dict>
+								<key>pontos</key>
+								<string></string>
+							</dict>
+						</dict>
+					</array>
+				</dict>
+			</array>
+			<key>Errors</key>
+			<array>
+				<dict>
+					<key>RE</key>
+					<string>Por favor, solicite agora uma nova senha</string>
+					<key>Error</key>
+					<string>Para garantir a segurança de seus dados, sua senha foi bloqueada, pois foram realizadas três tentativas de acesso, sem sucesso. Por favor, solicite agora uma nova senha no portal Meu Vivo.</string>
+				</dict>
+				<dict>
+					<key>RE</key>
+					<string>Antes de realizar uma nova tentativa de acesso</string>
+					<key>Error</key>
+					<string>Por favor, verifique suas credenciais e seu acesso através do navegador no Meu Vivo.</string>
+				</dict>
+				<dict>
+					<key>RE</key>
+					<string>Por favor, tente mais tarde.</string>
+					<key>Note</key>
+					<string>Ocorre quando o telefone/senha estão incorretos</string>
+					<key>Error</key>
+					<string>No momento não foi possível realizar o acesso. Por favor, tente mais tarde. Verifique se seus dados do &quot;Meu Vivo&quot; estão corretos.</string>
+				</dict>
+				<dict>
+					<key>RE</key>
+					<string>tente mais tarde</string>
+					<key>Error</key>
+					<string>No momento não foi possível realizar o acesso. Por favor, tente mais tarde.</string>
+				</dict>
+				<dict>
+					<key>Error</key>
+					<string>Sistema indisponível na Vivo / Meu Vivo. No momento não foi possível realizar o acesso. Por favor, tente novamente em alguns instantes.</string>
+				</dict>
+			</array>
+			<key>Requests</key>
+			<array>
+				<dict>
+					<key>URL</key>
+					<string>${BaseURL}/vivo?_nfpb=true&amp;_pageLabel=pages_consultarTrafegoDados_page&amp;_nfls=false</string>
+					<key>Title</key>
+					<string>Obtendo Tráfego de Dados</string>
+					<key>HTTPHeaders</key>
+					<dict>
+						<key>User-Agent</key>
+						<string>${UserAgent}</string>
+					</dict>
+					<key>Handlers</key>
+					<array>
+						<dict>
+							<key>RE</key>
+							<string>trafegados no (.*): ([^ ]*)</string>
+							<key>Results</key>
+							<array>
+								<string>label</string>
+								<string>consumo</string>
+							</array>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>URL</key>
+					<string>${BaseURL}/vivo?_nfpb=true&amp;_pageLabel=pages_consultarSaldoParcial_page&amp;_nfls=false</string>
+					<key>Title</key>
+					<string>Obtendo Saldo Parcial</string>
+					<key>HTTPHeaders</key>
+					<dict>
+						<key>User-Agent</key>
+						<string>${UserAgent}</string>
+					</dict>
+					<key>Handlers</key>
+					<array>
+						<dict>
+							<key>XPath</key>
+							<string>//td[@class=&apos;txtAzul volTd&apos;]</string>
+							<key>Results</key>
+							<array>
+								<dict>
+									<key>Node</key>
+									<integer>0</integer>
+									<key>Keys</key>
+									<dict>
+										<key>saldo</key>
+										<string></string>
+									</dict>
+								</dict>
+							</array>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+	</array>
+	<key>Sections</key>
+	<array>
+		<dict>
+			<key>Data</key>
+			<array>
+				<dict>
+					<key>Variable</key>
+					<string>@linha</string>
+				</dict>
+				<dict>
+					<key>Variable</key>
+					<string>@plano</string>
+				</dict>
+				<dict>
+					<key>Variable</key>
+					<string>@protocolo</string>
+				</dict>
+				<dict>
+					<key>Title</key>
+					<string>Data/Hora</string>
+					<key>Variable</key>
+					<string>@data</string>
+				</dict>
+				<dict>
+					<key>Variable</key>
+					<string>@pontos</string>
+					<key>Default</key>
+					<string>Não Contabilizado</string>
+				</dict>
+				<dict>
+					<key>Title</key>
+					<string>Saldo Parcial Estimado</string>
+					<key>Variable</key>
+					<string>@saldo</string>
+					<key>Default</key>
+					<string>Não Contabilizado</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>Footer</key>
+			<string>Os dados apresentados são obtidos de forma segura com a operadora através do portal oficial &quot;Meu Vivo&quot;.</string>
+			<key>Data</key>
+			<array>
+				<dict>
+					<key>Title</key>
+					<string>Dados (em Mb)</string>
+					<key>Variable</key>
+					<string>@consumo</string>
+					<key>Default</key>
+					<string>Não Contabilizado</string>
+				</dict>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>
