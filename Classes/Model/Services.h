@@ -16,6 +16,7 @@
 
 + (Services *)singleton;
 - (void)definitionsLoad;
+- (NSDictionary *)metaWithName:(NSString *)name;
 - (NSDictionary *)serviceWithName:(NSString *)name;
 - (void)definitionsUpdate;
 - (NSArray *)allServices;

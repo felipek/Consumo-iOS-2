@@ -14,7 +14,8 @@
 
 - (id)initWithIndex:(NSInteger)anIndex
 {
-	if (self = [super init]) {
+    self = [super init];
+	if (self != nil) {
 		index = anIndex;
 		account = [[Accounts singleton] accountAtIndex:index];
 		NSString *ID = [NSString stringWithFormat:@"Cache-%@-%@-2.plist", [account objectForKey:@"Carrier"], [account objectForKey:@"Username"]];
@@ -188,7 +189,6 @@
 {
 	MFMailComposeViewController *mailView = [self newMail];
 	
-	// TODO FEK: Add account label.
 	[mailView setSubject:[NSString stringWithFormat:@"%@ %@: %@",
 						  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"],
 						  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"],
@@ -238,9 +238,20 @@
 - (void)stopActivity
 {
 	[super stopActivity];
+    
+    NSNumber *timestamp = [data objectForKey:@"timestamp"];
+    if ([timestamp doubleValue] > 0) {
+        NSDate *date = [NSDate dateWithTimeIntervalSinceReferenceDate:[timestamp doubleValue]];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"dd/MM/yy HH:mm"];
+        NSString *fmt = [dateFormatter stringFromDate:date];
+        [buttonStatus setTitle:fmt];
+        [dateFormatter release];
+    }
 	
 	if (data != nil)
-		[self setToolbarItems:[NSArray arrayWithObjects:buttonEmail, buttonFlexible, buttonReport, nil] animated:YES];
+		[self setToolbarItems:[NSArray arrayWithObjects:buttonEmail, buttonFlexible,
+                               buttonStatus, buttonFlexible, buttonReport, nil] animated:YES];
 	else {
 		UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", @"")
 														 message:NSLocalizedString(@"Oops! We had problems interpreting your data. Please contact us to help improve the product.", @"")
@@ -265,7 +276,8 @@
 - (void)updateStatus:(NSDictionary *)node
 {
 	NSString *nodeTitle = [node objectForKey:@"Title"];
-	[buttonStatus setTitle:[NSString stringWithFormat:@"%@...", nodeTitle]];
+    if ([nodeTitle length] > 0)
+        [buttonStatus setTitle:[NSString stringWithFormat:@"%@...", nodeTitle]];
 }
 
 - (void)scraper:(ScraperMonkey *)scraper didStartNode:(NSDictionary *)node

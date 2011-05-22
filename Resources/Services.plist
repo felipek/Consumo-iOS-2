@@ -2,24 +2,62 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>vivo</key>
+	<key>oi empresa</key>
 	<dict>
+		<key>Definition</key>
+		<string>OiEmpresa.plist</string>
+		<key>Mirrors</key>
+		<array>
+			<string>http://dl.dropbox.com/u/514721/Consumo/OiEmpresa.plist</string>
+		</array>
 		<key>Name</key>
-		<string>Vivo</string>
-		<key>Title</key>
-		<string>Vivo (Meu Vivo)</string>
+		<string>Oi Empresa</string>
+		<key>PasswordRE</key>
+		<string>^[[:digit:]]{4}$</string>
 		<key>PasswordSample</key>
 		<string>1234</string>
-		<key>PasswordRE</key>
-		<string>^[[:digit:]]+$</string>
 		<key>PasswordWarning</key>
-		<string>A senha não parece estar correta. Na Vivo, a senha contém dígitos.</string>
+		<string>A senha não parece estar correta. Na Oi, a senha contém 4 dígitos.</string>
+		<key>Title</key>
+		<string>Oi Empresa</string>
+	</dict>
+	<key>oi conta</key>
+	<dict>
+		<key>Definition</key>
+		<string>OiConta.plist</string>
+		<key>Mirrors</key>
+		<array>
+			<string>http://dl.dropbox.com/u/514721/Consumo/OiConta.plist</string>
+		</array>
+		<key>Name</key>
+		<string>Oi Conta</string>
+		<key>PasswordRE</key>
+		<string>^[[:digit:]]{4}$</string>
+		<key>PasswordSample</key>
+		<string>1234</string>
+		<key>PasswordWarning</key>
+		<string>A senha não parece estar correta. Na Oi, a senha contém 4 dígitos.</string>
+		<key>Title</key>
+		<string>Oi Conta</string>
+	</dict>
+	<key>vivo</key>
+	<dict>
 		<key>Definition</key>
 		<string>Vivo.plist</string>
 		<key>Mirrors</key>
 		<array>
 			<string>http://dl.dropbox.com/u/514721/Consumo/Vivo.plist</string>
 		</array>
+		<key>Name</key>
+		<string>Vivo</string>
+		<key>PasswordRE</key>
+		<string>^[[:digit:]]+$</string>
+		<key>PasswordSample</key>
+		<string>1234</string>
+		<key>PasswordWarning</key>
+		<string>A senha não parece estar correta. Na Vivo, a senha contém dígitos.</string>
+		<key>Title</key>
+		<string>Vivo (Meu Vivo)</string>
 	</dict>
 </dict>
 </plist>

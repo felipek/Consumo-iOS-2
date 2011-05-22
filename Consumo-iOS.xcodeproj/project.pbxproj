@@ -13,8 +13,11 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		D72EA9B3138962B40026E111 /* OiConta.plist in Resources */ = {isa = PBXBuildFile; fileRef = D72EA9B2138962B40026E111 /* OiConta.plist */; };
 		EE06E6A212D4FF67006B75F1 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE06E6A112D4FF67006B75F1 /* MessageUI.framework */; };
 		EE06E74512D509DD006B75F1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE06E74412D509DD006B75F1 /* Localizable.strings */; };
+		EE93379D1347693200923186 /* OiEmpresa.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE93379C1347693200923186 /* OiEmpresa.plist */; };
+		EE9337A013476A5E00923186 /* NSString+compareVersions.m in Sources */ = {isa = PBXBuildFile; fileRef = EE93379F13476A5E00923186 /* NSString+compareVersions.m */; };
 		EEAC1CB412D5119700C76D02 /* Consumo-icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = EEAC1CB112D5119700C76D02 /* Consumo-icon-57.png */; };
 		EEAC1CB512D5119700C76D02 /* Consumo-icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = EEAC1CB212D5119700C76D02 /* Consumo-icon-114.png */; };
 		EEAC1DD412D5770800C76D02 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAC1DD312D5770800C76D02 /* SystemConfiguration.framework */; };
@@ -45,8 +48,12 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Consumo_iOS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Consumo_iOS_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Consumo_iOS-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Consumo_iOS-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		D72EA9B2138962B40026E111 /* OiConta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = OiConta.plist; path = Resources/OiConta.plist; sourceTree = "<group>"; };
 		EE06E6A112D4FF67006B75F1 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		EE06E74612D509E2006B75F1 /* Portuguese */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Portuguese; path = Resources/Portuguese.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EE93379C1347693200923186 /* OiEmpresa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = OiEmpresa.plist; path = Resources/OiEmpresa.plist; sourceTree = "<group>"; };
+		EE93379E13476A5E00923186 /* NSString+compareVersions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+compareVersions.h"; path = "Classes/Tools/NSString+compareVersions.h"; sourceTree = "<group>"; };
+		EE93379F13476A5E00923186 /* NSString+compareVersions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+compareVersions.m"; path = "Classes/Tools/NSString+compareVersions.m"; sourceTree = "<group>"; };
 		EEAC1CB112D5119700C76D02 /* Consumo-icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Consumo-icon-57.png"; path = "Resources/Bitmap/Consumo-icon-57.png"; sourceTree = "<group>"; };
 		EEAC1CB212D5119700C76D02 /* Consumo-icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Consumo-icon-114.png"; path = "Resources/Bitmap/Consumo-icon-114.png"; sourceTree = "<group>"; };
 		EEAC1CB312D5119700C76D02 /* Consumo-icon-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Consumo-icon-512.png"; path = "Resources/Bitmap/Consumo-icon-512.png"; sourceTree = "<group>"; };
@@ -130,6 +137,8 @@
 			children = (
 				32CA4F630368D1EE00C91783 /* Consumo_iOS_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
+				EE93379E13476A5E00923186 /* NSString+compareVersions.h */,
+				EE93379F13476A5E00923186 /* NSString+compareVersions.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -143,6 +152,8 @@
 				EEE08FE812D358B3002192E1 /* Services.plist */,
 				EEAC1ED812D58A4D00C76D02 /* Thanks.plist */,
 				EEC1401B12EA796700045679 /* Vivo.plist */,
+				EE93379C1347693200923186 /* OiEmpresa.plist */,
+				D72EA9B2138962B40026E111 /* OiConta.plist */,
 				EE06E74412D509DD006B75F1 /* Localizable.strings */,
 			);
 			name = Resources;
@@ -259,6 +270,8 @@
 				EEAC1CB512D5119700C76D02 /* Consumo-icon-114.png in Resources */,
 				EEAC1ED912D58A4D00C76D02 /* Thanks.plist in Resources */,
 				EEC1401C12EA796700045679 /* Vivo.plist in Resources */,
+				EE93379D1347693200923186 /* OiEmpresa.plist in Resources */,
+				D72EA9B3138962B40026E111 /* OiConta.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +291,7 @@
 				EEE08D7812D2CA7E002192E1 /* SetupAccountViewController.m in Sources */,
 				EEAC1DE712D57C0700C76D02 /* AboutViewController.m in Sources */,
 				EEC142F812EB09B100045679 /* Services.m in Sources */,
+				EE9337A013476A5E00923186 /* NSString+compareVersions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

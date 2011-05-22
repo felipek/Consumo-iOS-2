@@ -8,6 +8,7 @@
 
 #import "SetupAccountViewController.h"
 #import "Accounts.h"
+#import "Services.h"
 #import "RegexKitLite.h"
 
 @implementation SetupAccountViewController
@@ -16,7 +17,8 @@
 
 - (id)initWithAccount:(NSDictionary *)anAccount
 {
-	if (self = [super init]) {
+    self = [super init];
+	if (self != nil) {
 		account = [anAccount retain];
 	}
 
@@ -28,12 +30,8 @@
 - (void)loadView
 {
 	[super loadView];
-	
-	NSString *file = [[NSBundle mainBundle] pathForResource:@"Services" ofType:@"plist"];
-	services = [[NSDictionary dictionaryWithContentsOfFile:file] retain];
-	servicesList = [[services allKeys] retain];
-	
-	serviceCurrent = [servicesList objectAtIndex:0];
+
+	serviceCurrent = [[[Services singleton] allServices] objectAtIndex:0];
 
 	buttonSave = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Save", @"")
 												  style:UIBarButtonItemStyleDone
@@ -73,7 +71,8 @@
 	[tableView setScrollIndicatorInsets:tableView.contentInset];
 	
 	if (account != nil) {
-		// TODO FEK: Provider (operadora)!
+        serviceCurrent = [account objectForKey:@"Carrier"];
+
 		[textUsername setText:[account objectForKey:@"Username"]];
 		[textPassword setText:[account objectForKey:@"Password"]];
 		[textLabel setText:[account objectForKey:@"Label"]];
@@ -99,6 +98,10 @@
 - (void)viewDidAppear:(BOOL)animated
 {
 	[textUsername becomeFirstResponder];
+    
+    if (account == nil)
+        [self presentServiceSheet];
+    
 	[super viewDidAppear:animated];
 }
 
@@ -132,9 +135,9 @@
 	
 	NSString *password = [textPassword.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 
-	NSString *passwordRE = [[self serviceForName:serviceCurrent] objectForKey:@"PasswordRE"];
+	NSString *passwordRE = [[self service] objectForKey:@"PasswordRE"];
 	if (passwordRE != nil && ! [password isMatchedByRegex:passwordRE]) {
-		NSString *passwordWarning = [[self serviceForName:serviceCurrent] objectForKey:@"PasswordWarning"];
+		NSString *passwordWarning = [[self service] objectForKey:@"PasswordWarning"];
 		UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", @"")
 														 message:passwordWarning
 														delegate:nil
@@ -156,7 +159,6 @@
 		[delegate didCreateAccount:newAccount];
 		[newAccount release];
 	} else {
-		// TODO FEK: This looks ugly ;-)  Move account to an object.
 		[account setValue:username forKey:@"Username"];
 		[account setValue:password forKey:@"Password"];
 		[account setValue:textLabel.text forKey:@"Label"];
@@ -182,14 +184,28 @@
 		[self dismissModalViewControllerAnimated:YES];
 }
 
-- (NSDictionary *)serviceForName:(NSString *)service
-{
-	return [services objectForKey:service];
-}
-
 - (NSDictionary *)service
 {
-	return [services objectForKey:serviceCurrent];
+	return [[Services singleton] metaWithName:serviceCurrent];
+}
+
+- (void)presentServiceSheet
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Select a service", @"")
+                                                             delegate:self
+                                                    cancelButtonTitle:nil
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:nil];
+    
+    for (NSString *service in [[Services singleton] allServices])
+        [actionSheet addButtonWithTitle:[[[Services singleton] metaWithName:service] objectForKey:@"Title"]];
+    
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"I Want Others!", @"")];
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
+    [actionSheet setCancelButtonIndex:[[[Services singleton] allServices] count] + 1];
+    
+    [actionSheet showFromToolbar:self.navigationController.toolbar];
+    [actionSheet release];
 }
 
 #pragma mark Table view
@@ -229,7 +245,9 @@
 		case 0:
 			[cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
 			[cell.textLabel setText:NSLocalizedString(@"Service", @"")];
-			[cell.detailTextLabel setText:[[self service] objectForKey:@"Title"]];
+            NSDictionary *serv = [self service];
+
+			[cell.detailTextLabel setText:[serv objectForKey:@"Title"]];
 			break;
 			
 		case 1:
@@ -242,7 +260,7 @@
 				case 1:
 					[cell.textLabel setText:NSLocalizedString(@"Password", @"")];
 					[cell.contentView addSubview:textPassword];
-					[textPassword setPlaceholder:[[[self serviceForName:serviceCurrent] objectForKey:@"PasswordSample"] stringByAppendingString:@" "]];
+					[textPassword setPlaceholder:[[[self service] objectForKey:@"PasswordSample"] stringByAppendingString:@" "]];
 					break;
 			}
 			break;
@@ -276,21 +294,7 @@
 		case 0:
 			[table deselectRowAtIndexPath:indexPath animated:YES];
 			
-			UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Select a service", @"")
-																	 delegate:self
-															cancelButtonTitle:nil
-													   destructiveButtonTitle:nil
-															otherButtonTitles:nil];
-			
-			for (NSString *service in servicesList)
-				[actionSheet addButtonWithTitle:[[self serviceForName:service] objectForKey:@"Title"]];
-			
-			[actionSheet addButtonWithTitle:NSLocalizedString(@"I Want Others!", @"")];
-			[actionSheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
-			[actionSheet setCancelButtonIndex:[servicesList count] + 1];
-			
-			[actionSheet showFromToolbar:self.navigationController.toolbar];
-			[actionSheet release];			
+            [self presentServiceSheet];
 			break;
 		case 1:
 			switch (indexPath.row) {
@@ -327,14 +331,18 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	if (buttonIndex == [servicesList count]) {
-		UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Other services", @"")
-														 message:NSLocalizedString(@"We are working to add other services. Please stay tuned or contact us if you can help with something.", @"")
-														delegate:nil
-											   cancelButtonTitle:NSLocalizedString(@"Dismiss", @"")
-											   otherButtonTitles:nil] autorelease];
-		[alert show];
-	}
+    if (buttonIndex > [[[Services singleton] allServices] count]) {
+        return;
+    } else if (buttonIndex == [[[Services singleton] allServices] count]) {
+		[[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Other services", @"")
+                                     message:NSLocalizedString(@"We are working to add other services. Please stay tuned or contact us if you can help with something.", @"")
+                                    delegate:nil
+                           cancelButtonTitle:NSLocalizedString(@"Dismiss", @"")
+                           otherButtonTitles:nil] autorelease] show];
+        return;
+	} else {
+        serviceCurrent = [[[Services singleton] allServices] objectAtIndex:buttonIndex];
+    }
 	
 	[tableView reloadData];
 	
@@ -374,7 +382,6 @@
 	[switchRefresh release];
 	[buttonSave release];
 	[services release];
-	[servicesList release];
 	[account release];
 
 	[super dealloc];

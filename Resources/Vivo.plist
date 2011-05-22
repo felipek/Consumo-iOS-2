@@ -13,6 +13,12 @@
 			<array>
 				<dict>
 					<key>Error</key>
+					<string>Este é seu primeiro acesso. Para realizar o acesso, aceite os termos de uso e confirme a senha através do Meu Vivo. http://bit.ly/meuvivo</string>
+					<key>RE</key>
+					<string>frmPrimeiroAcesso</string>
+				</dict>
+				<dict>
+					<key>Error</key>
 					<string>Para garantir a segurança de seus dados, sua senha foi bloqueada, pois foram realizadas três tentativas de acesso, sem sucesso. Por favor, solicite agora uma nova senha no portal Meu Vivo. http://bit.ly/meuvivo</string>
 					<key>RE</key>
 					<string>Por favor, solicite agora uma nova senha</string>
@@ -139,7 +145,7 @@
 				<key>login_1%%7BactionForm.captcha%%7D:</key>
 				<string></string>
 				<key>senha</key>
-				<string>${senha}</string>
+				<string>${senha%(.)%$1$1}</string>
 				<key>senhaIni</key>
 				<string>senha</string>
 			</dict>
@@ -224,7 +230,7 @@
 				</dict>
 				<dict>
 					<key>Title</key>
-					<string>Data/Hora</string>
+					<string>Último Acesso</string>
 					<key>Variable</key>
 					<string>@data</string>
 				</dict>
@@ -268,6 +274,6 @@
 		<string>Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_6; en-us) AppleWebKit/533.19.4 (KHTML, like Gecko) Version/5.0.3 Safari/533.19.4</string>
 	</dict>
 	<key>Version</key>
-	<string>1.0</string>
+	<string>1.2</string>
 </dict>
 </plist>

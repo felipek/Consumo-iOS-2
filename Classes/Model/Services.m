@@ -7,13 +7,15 @@
 //
 
 #import "Services.h"
+#import "NSString+compareVersions.h"
 #import "ASIHTTPRequest.h"
 
 @implementation Services
 
 - (id)init
 {
-	if (self = [super init]) {
+    self = [super init];
+	if (self != nil) {
 		NSString *file = [[NSBundle mainBundle] pathForResource:@"Services" ofType:@"plist"];
 		services = [[NSDictionary dictionaryWithContentsOfFile:file] retain];
 		serviceDefinition = [[NSMutableDictionary alloc] init];
@@ -59,6 +61,11 @@
 		[self definitionLoad:[services objectForKey:service]];
 }
 
+- (NSDictionary *)metaWithName:(NSString *)name
+{
+    return [services objectForKey:[name lowercaseString]];
+}
+
 - (NSDictionary *)serviceWithName:(NSString *)name
 {
 	return [serviceDefinition objectForKey:[name lowercaseString]];
@@ -86,7 +93,7 @@
 			if (! [tmpDict isKindOfClass:[NSDictionary class]])
 				continue;
 			
-			if (! [[tmpDict objectForKey:@"Version"] isEqualToString:[definition objectForKey:@"Version"]]) {
+            if ([[tmpDict objectForKey:@"Version"] compareToVersion:[definition objectForKey:@"Version"]] == NSOrderedDescending) {
 				// Wee, different version :-)
 				filePath = [documents stringByAppendingPathComponent:[serv objectForKey:@"Definition"]];
 				[tmpDict writeToFile:filePath atomically:YES];
@@ -100,7 +107,7 @@
 
 - (NSArray *)allServices
 {
-	return [serviceDefinition allKeys];
+	return [[serviceDefinition allKeys] sortedArrayUsingSelector:@selector(compare:)];
 }
 
 - (void)dealloc

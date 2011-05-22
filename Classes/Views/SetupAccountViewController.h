@@ -29,7 +29,6 @@
 	UISwitch					*switchRefresh;
 	
 	NSDictionary				*services;
-	NSArray						*servicesList;
 	NSString					*serviceCurrent;
 	NSDictionary				*account;
 
@@ -37,6 +36,8 @@
 }
 
 - (id)initWithAccount:(NSDictionary *)anAccount;
+- (NSDictionary *)serviceForName:(NSString *)service;
+- (NSDictionary *)service;
 
 @property (nonatomic, retain) id<SetupAccountDelegate> delegate;
 
