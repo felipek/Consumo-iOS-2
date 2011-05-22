@@ -3,7 +3,7 @@
 //  Consumo-iOS
 //
 //  Created by Felipe Kellermann on 4/2/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Nyvra. All rights reserved.
 //
 
 #import "NSString+compareVersions.h"
