@@ -1,4 +1,4 @@
-    //
+ //
 //  SetupAccountViewController.m
 //  Consumo-iOS
 //
@@ -47,7 +47,8 @@
 	[textUsername setTextAlignment:UITextAlignmentRight];
 	[textUsername setKeyboardType:UIKeyboardTypePhonePad];
 	[textUsername setPlaceholder:[NSLocalizedString(@"5198581234", @"") stringByAppendingString:@" "]];
-	[textUsername setTag:50];
+	[textUsername setDelegate:self];
+        [textUsername setTag:50];
 
 	textPassword = [[UITextField alloc] initWithFrame:CGRectMake(100, 10, 185, 23)];
 	[textPassword setTextAlignment:UITextAlignmentRight];
@@ -368,6 +369,22 @@
 		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
 		[tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
 	}
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField != textUsername)
+    {
+        [textField.text stringByAppendingString:string];
+        return YES;
+    }
+    else if (textField == textUsername && [textField.text length] < 10 || [string isEqualToString:@""])
+    {
+        [textField.text stringByAppendingString:string];
+        return YES;
+    }
+    else
+        return NO;
 }
 
 #pragma mark Memory management
